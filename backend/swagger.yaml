@@ -1,0 +1,161 @@
+openapi: 3.0.0
+info:
+  title: Task Management API
+  description: API documentation for Task Management System
+  version: 1.0.0
+servers:
+  - url: /api
+    description: Local server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      tags: [Auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password]
+              properties:
+                name:
+                  type: string
+                  example: "John Doe"
+                email:
+                  type: string
+                  example: "john@example.com"
+                password:
+                  type: string
+                  example: "Password123!"
+      responses:
+        '201':
+          description: User registered successfully
+        '400':
+          description: Bad request
+  /auth/login:
+    post:
+      summary: Login user
+      tags: [Auth]
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                  example: "john@example.com"
+                password:
+                  type: string
+                  example: "Password123!"
+      responses:
+        '200':
+          description: Login successful
+        '401':
+          description: Invalid credentials
+  /tasks:
+    get:
+      summary: Get all tasks
+      tags: [Tasks]
+      parameters:
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [pending, in-progress, done]
+        - in: query
+          name: search
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of tasks
+    post:
+      summary: Create a new task
+      tags: [Tasks]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title:
+                  type: string
+                  example: "Belajar API Swagger"
+                description:
+                  type: string
+                  example: "Mempelajari fitur otomasi dan dokumentasi Swagger"
+                status:
+                  type: string
+                  enum: [pending, in-progress, done]
+                  example: "pending"
+                deadline:
+                  type: string
+                  format: date
+                  example: "2026-12-31"
+      responses:
+        '201':
+          description: Task created
+  /tasks/{id}:
+    put:
+      summary: Update a task
+      tags: [Tasks]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "Belajar API Swagger Selesai"
+                description:
+                  type: string
+                  example: "Saya sudah memahaminya."
+                status:
+                  type: string
+                  enum: [pending, in-progress, done]
+                  example: "done"
+                deadline:
+                  type: string
+                  format: date
+                  example: "2026-12-31"
+      responses:
+        '200':
+          description: Task updated
+    delete:
+      summary: Delete a task
+      tags: [Tasks]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Task deleted
