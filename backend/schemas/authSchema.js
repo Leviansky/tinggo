@@ -3,7 +3,10 @@ const { z } = require('zod');
 const registerSchema = z.object({
     name: z.string().min(1, 'Nama wajib diisi'),
     email: z.string().email('Format email tidak valid'),
-    password: z.string().min(6, 'Kata sandi harus minimal 6 karakter')
+    password: z.string()
+        .min(6, 'Kata sandi harus minimal 6 karakter')
+        .regex(/[a-zA-Z]/, 'Kata sandi harus mengandung setidaknya satu huruf')
+        .regex(/[0-9]/, 'Kata sandi harus mengandung setidaknya satu angka')
 });
 
 const loginSchema = z.object({
