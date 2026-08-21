@@ -81,7 +81,7 @@ Aplikasi ini memisahkan sistem menjadi dua bagian utama (*Frontend* dan *Backend
 Tinggo dilengkapi dengan dokumentasi API otomatis berstandar OpenAPI (Swagger).
 Anda dapat membaca dan mencoba API secara interaktif melalui URL berikut (pastikan backend sudah berjalan):
 
-👉 **[http://localhost:5000/api-docs](http://localhost:5000/api-docs)**
+👉 **[disini]([http://localhost:5000/api-docs](https://tinggo-production.up.railway.app/api-docs/))**
 
 *Di halaman ini, Anda bisa melakukan Authorize menggunakan Token JWT dan mencoba request secara langsung.*
 
