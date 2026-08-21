@@ -93,9 +93,9 @@ Anda dapat membaca dan mencoba API secara interaktif melalui URL berikut (pastik
 
 | Halaman Login | Halaman Dashboard (Task List) |
 | :---: | :---: |
-| *(Silakan ganti teks ini dengan Screenshot Login)* | *(Silakan ganti teks ini dengan Screenshot Dashboard)* |
+| ![Login](https://github.com/user-attachments/assets/ce476c03-4658-4594-a267-c5840f4556f9) | ![Dashboard](https://github.com/user-attachments/assets/ee7cba13-b3a1-4bc3-9b39-159e5b5a711c) |
 | Halaman Registrasi | Dokumentasi API (Swagger) |
-| *(Silakan ganti teks ini dengan Screenshot Register)* | *(Silakan ganti teks ini dengan Screenshot Swagger)* |
+| ![Register](https://github.com/user-attachments/assets/8a64acaf-7cf6-40a2-ada0-38da12100ab7) | ![Swagger](https://github.com/user-attachments/assets/c03e4775-c19b-43cc-bf3d-80357c422a26) |
 
 ---
 *Dibuat untuk keperluan Technical Assessment Fullstack Web Developer.*
