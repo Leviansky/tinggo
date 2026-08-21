@@ -1,103 +1,101 @@
 # Tinggo (Ticket Kanggo) - Task Management System
 
-Tinggo adalah aplikasi **Task Management System** *full-stack* modern yang memungkinkan pengguna untuk mengelola tugas-tugas pribadi mereka secara terorganisir. Aplikasi ini dibangun untuk memenuhi kualifikasi *Technical Test: Fullstack Web Developer* dengan mengadopsi standar pengembangan *startup* modern.
+Tinggo adalah aplikasi **Task Management System** *full-stack* modern yang memungkinkan pengguna untuk melacak, mengelola, dan menyelesaikan tugas-tugas dengan mudah. Aplikasi ini dibangun dengan standar arsitektur *startup* menggunakan perpaduan React (Vite & TanStack), Node.js, Express, dan MySQL.
 
-## 🚀 Fitur Utama (Minimal Viable Product & Nilai Plus)
-- **Autentikasi Aman:** Registrasi & Login dengan JWT dan *Bcrypt Password Hashing*.
-- **CRUD Tugas:** Buat, Baca, Perbarui, dan Hapus (beserta detail judul, deskripsi, status, dan *deadline*).
-- **Filter & Live Search:** Pencarian *real-time* dengan sistem pembatalan laju (*debouncing*) dan penyaringan berdasarkan status (*Pending, In-Progress, Done*).
-- **Pagination Cerdas:** Sistem penomoran halaman dengan *keepPreviousData* (mencegah kedipan antarmuka saat memuat).
-- **Optimistic UI Updates:** Aplikasi merespons seketika saat data ditambah, diubah, atau dihapus seolah-olah tanpa *delay* dari *server*.
-- **Validasi Ketat (End-to-End):** Validasi berlapis dari klien (React Hook Form + Zod) hingga *server* (Zod Middleware).
-- **UX Premium:** Didesain *pixel-perfect* menggunakan Tailwind CSS & Shadcn UI, serta notifikasi responsif (Sonner).
-- **Dokumentasi API:** Tersedia melalui OpenAPI/Swagger.
+## 🚀 Deskripsi Singkat Aplikasi
+Aplikasi ini memisahkan sistem menjadi dua bagian utama (*Frontend* dan *Backend*) yang berkomunikasi via REST API. Fitur utamanya meliputi:
+- **Autentikasi (JWT):** Login dan Register dengan *password hashing* bcrypt.
+- **CRUD Task:** Membuat, membaca, memperbarui status, dan menghapus tugas.
+- **Pencarian & Filter:** Filter tugas berdasarkan status (*Pending, In Progress, Done*) dan fitur pencarian secara *real-time*.
+- **Modern UI/UX:** Tampilan responsif dan rapi berkat Tailwind CSS dan komponen Radix UI.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Petunjuk Menjalankan Backend
 
-| Bagian | Teknologi |
-| :--- | :--- |
-| **Backend API** | Node.js (Express.js) |
-| **Frontend** | React.js dengan Hooks (TanStack Start & Vite) |
-| **Database** | MySQL (menggunakan `mysql2/promise`) |
-| **Autentikasi** | JSON Web Token (JWT) + bcrypt |
-| **UI & Styling** | Tailwind CSS + Shadcn UI + Lucide Icons |
-| **Testing** | Jest (Middlewares Unit Testing) |
-| **Infrastruktur**| Docker & Docker Compose (Opsional) |
+### 1. Prasyarat & Instalasi
+- Pastikan Anda sudah menginstal **Node.js** (v18+) dan **MySQL Server**.
+- Buka terminal, masuk ke folder backend, lalu jalankan perintah instalasi:
+  ```bash
+  cd backend
+  npm install
+  ```
 
----
+### 2. Setup Database MySQL
+- Masuk ke MySQL di komputer Anda (melalui CLI atau *tools* seperti phpMyAdmin / DBeaver).
+- Buat *database* baru, contoh:
+  ```sql
+  CREATE DATABASE task_management;
+  ```
+- Ekspor/jalankan semua *query* yang ada di dalam file `backend/schema.sql` untuk membuat tabel `users` dan `tasks`.
 
-## ⚙️ Petunjuk Menjalankan Aplikasi (Lokal)
+### 3. Setup Environment Variables (.env)
+- Di dalam folder `backend`, buat sebuah file bernama `.env`.
+- Salin kode berikut ke dalamnya dan ubah kredensial `DB_USER` dan `DB_PASSWORD` sesuai dengan MySQL Anda:
+  ```env
+  PORT=5000
+  DB_HOST=localhost
+  DB_USER=root
+  DB_PASSWORD=password_anda
+  DB_NAME=task_management
+  JWT_SECRET=rahasia_super_aman_123
+  ```
 
-### 1. Prasyarat
-- **Node.js** (versi 18+)
-- **MySQL Server** (atau Docker jika menggunakan kontainer)
-- **Git**
-
-### 2. Konfigurasi Backend & Database
-1. Buka terminal dan masuk ke direktori `backend`:
-   ```bash
-   cd backend
-   ```
-2. Instal semua dependensi:
-   ```bash
-   npm install
-   ```
-3. Konfigurasi *Environment*:
-   - Gandakan (copy) file `.env.example` dan ubah namanya menjadi `.env`.
-   - Sesuaikan konfigurasi kredensial MySQL Anda:
-     ```env
-     PORT=5000
-     DB_HOST=localhost
-     DB_USER=root
-     DB_PASSWORD=password_anda
-     DB_NAME=task_management
-     JWT_SECRET=super_secret_key_anda
-     ```
-4. Inisialisasi Database:
-   - Buat database MySQL dengan nama `task_management` (atau sesuai konfigurasi).
-   - Jalankan *query* yang terdapat pada file `backend/schema.sql` di sistem basis data Anda untuk membuat tabel yang dibutuhkan.
-5. Jalankan server backend:
-   ```bash
-   npm run dev
-   ```
-   > **Dokumentasi API (Swagger)** dapat diakses di: `http://localhost:5000/api-docs`
-
-### 3. Konfigurasi Frontend
-1. Buka tab terminal baru dan masuk ke direktori `frontend`:
-   ```bash
-   cd frontend
-   ```
-2. Instal semua dependensi:
-   ```bash
-   npm install
-   ```
-3. Jalankan server frontend:
-   ```bash
-   npm run dev
-   ```
-4. Buka browser dan akses aplikasi di: `http://localhost:5173`
+### 4. Menjalankan Backend Server
+- Jalankan *server* dalam mode *development*:
+  ```bash
+  npm run dev
+  ```
+- *Backend* akan menyala di `http://localhost:5000`.
 
 ---
 
-## 🐳 Menjalankan dengan Docker (Opsional)
+## 💻 Petunjuk Menjalankan Frontend
 
-Jika Anda ingin menjalankan aplikasi + database sekaligus tanpa repot instalasi konfigurasi secara manual, Anda bisa menggunakan Docker Compose.
+### 1. Prasyarat & Instalasi
+- Buka terminal baru (biarkan terminal *backend* tetap berjalan).
+- Masuk ke folder frontend dan jalankan instalasi:
+  ```bash
+  cd frontend
+  npm install
+  ```
 
-1. Pastikan **Docker** dan **Docker Compose** sudah terinstal.
-2. Dari struktur paling luar (*root* folder repository), jalankan:
-   ```bash
-   docker-compose up -d --build
-   ```
-3. Aplikasi Frontend, Backend API, dan Database MySQL akan otomatis berjalan terisolasi di dalam kontainer.
+### 2. Setup Environment Variables (.env)
+- Di dalam folder `frontend`, buat file `.env`.
+- Masukkan URL API yang mengarah ke *backend*:
+  ```env
+  VITE_API_URL=http://localhost:5000/api
+  ```
+
+### 3. Menjalankan Frontend Server
+- Jalankan *server* frontend:
+  ```bash
+  npm run dev
+  ```
+- Buka *browser* Anda dan akses `http://localhost:5173`.
 
 ---
 
-## 📷 Screenshot Tampilan (Opsional)
+## 📖 Link Dokumentasi API
 
-*(Silakan tambahkan URL/Gambar tampilan layar aplikasi Anda di sini sebelum disubmit)*
+Tinggo dilengkapi dengan dokumentasi API otomatis berstandar OpenAPI (Swagger).
+Anda dapat membaca dan mencoba API secara interaktif melalui URL berikut (pastikan backend sudah berjalan):
+
+👉 **[http://localhost:5000/api-docs](http://localhost:5000/api-docs)**
+
+*Di halaman ini, Anda bisa melakukan Authorize menggunakan Token JWT dan mencoba request secara langsung.*
 
 ---
 
-*Hak Cipta © 2026 Tinggo / Kanggo Test.*
+## 📷 Screenshot Tampilan
+
+*(Opsional: Berikut adalah gambaran tampilan aplikasi Tinggo)*
+
+| Halaman Login | Halaman Dashboard (Task List) |
+| :---: | :---: |
+| *(Silakan ganti teks ini dengan Screenshot Login)* | *(Silakan ganti teks ini dengan Screenshot Dashboard)* |
+| Halaman Registrasi | Dokumentasi API (Swagger) |
+| *(Silakan ganti teks ini dengan Screenshot Register)* | *(Silakan ganti teks ini dengan Screenshot Swagger)* |
+
+---
+*Dibuat untuk keperluan Technical Assessment Fullstack Web Developer.*
