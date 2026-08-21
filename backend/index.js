@@ -91,7 +91,7 @@ app.use(errorHandler);
 
 // Start Server
 if (process.env.NODE_ENV !== 'test') {
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
         console.log(`Server is running on port ${PORT}`);
         console.log(`Swagger docs available at http://localhost:${PORT}/api-docs`);
     });
